@@ -1,6 +1,6 @@
 from typing_extensions import Type, Tuple, Generator
 
-from ripple_down_rules import has, dependsOn
+from ripple_down_rules import has, dependsOn, PredicateOutputType, PredicateArgType
 from ripple_down_rules.datastructures.tracked_object import TrackedObjectMixin
 from ripple_down_rules.rules import Rule
 from ripple_down_rules_meta import DependsOn
@@ -29,8 +29,8 @@ def conclusion_3929361033208322153670901849644072096(case) \
 
 
 def conditions_114740124515448400708123236287653930408(case) -> bool:
-    def conditions_for_depends_on_evaluate(cls_: Type[DependsOn], dependent: Type[TrackedObjectMixin],
-                                           dependency: Type[TrackedObjectMixin], recursive: bool, is_reversed: bool,
+    def conditions_for_depends_on_evaluate(cls_: Type[DependsOn], dependent: PredicateArgType,
+                                           dependency: PredicateArgType, recursive: bool, is_reversed: bool,
                                            **kwargs) -> bool:
         """Get conditions on whether it's possible to conclude a value for depends_on_evaluate.output_  of type ."""
         return isinstance(dependent, Rule) and isinstance(dependency, Rule)
@@ -39,10 +39,10 @@ def conditions_114740124515448400708123236287653930408(case) -> bool:
 
 
 def conclusion_114740124515448400708123236287653930408(case) \
-        -> Generator[Tuple[Type[TrackedObjectMixin], Type[TrackedObjectMixin]], None, None]:
-    def depends_on_evaluate(cls_: Type[DependsOn], dependent: Type[TrackedObjectMixin],
-                            dependency: Type[TrackedObjectMixin], recursive: bool, is_reversed: bool, **kwargs) \
-            -> Generator[Tuple[Type[TrackedObjectMixin], Type[TrackedObjectMixin]], None, None]:
+        -> PredicateOutputType:
+    def depends_on_evaluate(cls_: Type[DependsOn], dependent: PredicateArgType,
+                            dependency: PredicateArgType, recursive: bool, is_reversed: bool, **kwargs) \
+            -> PredicateOutputType:
         """Get possible value(s) for depends_on_evaluate.output_  of type ."""
         yield from (dependsOn(dependent_ct, dependency_ct, recursive=recursive, is_reversed=is_reversed)
                     for dependent_ct in dependent.conclusion.conclusion_type
