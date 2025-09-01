@@ -1,7 +1,7 @@
 from typing_extensions import Any, Dict
 from ripple_down_rules.helpers import general_rdr_classify
 from ripple_down_rules.datastructures.case import Case, create_case
-from . import depends_on_evaluate_output__scrdr as output__classifier
+from . import depends_on_infer_output__scrdr as output__classifier
 
 name = 'output_'
 case_type = Dict

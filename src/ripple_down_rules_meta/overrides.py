@@ -29,7 +29,7 @@ class DependsOn(OGDependsOn):
     """
     @classmethod
     @rdr_decorator.decorator
-    def evaluate(cls, dependent: Type[TrackedObjectMixin],
+    def _infer(cls, dependent: Type[TrackedObjectMixin],
                  dependency: Type[TrackedObjectMixin], recursive: bool = False) -> bool:
         pass
 
